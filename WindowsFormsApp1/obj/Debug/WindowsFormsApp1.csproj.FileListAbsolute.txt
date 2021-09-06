@@ -1,0 +1,17 @@
+D:\procowork\iron\IronWater\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+D:\procowork\iron\IronWater\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+D:\procowork\iron\IronWater\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+D:\procowork\iron\IronWater\WindowsFormsApp1\bin\Debug\OxyPlot.dll
+D:\procowork\iron\IronWater\WindowsFormsApp1\bin\Debug\OxyPlot.WindowsForms.dll
+D:\procowork\iron\IronWater\WindowsFormsApp1\bin\Debug\OxyPlot.xml
+D:\procowork\iron\IronWater\WindowsFormsApp1\bin\Debug\OxyPlot.WindowsForms.xml
+D:\procowork\iron\IronWater\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+D:\procowork\iron\IronWater\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+D:\procowork\iron\IronWater\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\procowork\iron\IronWater\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+D:\procowork\iron\IronWater\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+D:\procowork\iron\IronWater\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
+D:\procowork\iron\IronWater\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+D:\procowork\iron\IronWater\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+D:\procowork\iron\IronWater\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Forms.Form2.resources
+D:\procowork\iron\IronWater\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Forms.Nice.resources
