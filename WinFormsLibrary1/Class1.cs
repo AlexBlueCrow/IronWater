@@ -2,8 +2,8 @@
 
 namespace WinFormsLibrary1
 {
-    public class Class1
+    public class Settings
     {
-
+        
     }
 }

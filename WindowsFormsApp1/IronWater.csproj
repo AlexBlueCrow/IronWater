@@ -56,6 +56,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -67,12 +68,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="ConfigurationDataDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ConfigurationDataDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="DBcontrol.cs" />
+    <Compile Include="Forms\PswdSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PswdSetting.Designer.cs">
+      <DependentUpon>PswdSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\HistoryData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,8 +107,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\PswdSetting.resx">
+      <DependentUpon>PswdSetting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SensorSetting.resx">
+      <DependentUpon>SensorSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SysSetting.resx">
       <DependentUpon>SysSetting.cs</DependentUpon>
