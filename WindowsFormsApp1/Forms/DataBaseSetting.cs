@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1.Forms
 {
-    public partial class SensorSetting : Form
+    public partial class DataBaseSetting : Form
     {
-        public SensorSetting()
+        public DataBaseSetting()
         {
             InitializeComponent();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DataBaseSetting_Load(object sender, EventArgs e)
         {
 
         }

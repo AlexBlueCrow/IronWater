@@ -75,6 +75,12 @@
       <DependentUpon>ConfigurationDataDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="DBcontrol.cs" />
+    <Compile Include="Forms\DataBaseSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataBaseSetting.Designer.cs">
+      <DependentUpon>DataBaseSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PswdSetting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\DataBaseSetting.resx">
+      <DependentUpon>DataBaseSetting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\PswdSetting.resx">
       <DependentUpon>PswdSetting.cs</DependentUpon>
     </EmbeddedResource>

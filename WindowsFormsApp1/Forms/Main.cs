@@ -31,8 +31,9 @@ namespace WindowsFormsApp1
         {
             
             SysSetting subform = new SysSetting();
-            subform.MdiParent = this;
-            subform.Show();
+            //subform.MdiParent = this;
+            subform.StartPosition = FormStartPosition.CenterScreen;
+            subform.ShowDialog();
 
         }
 
@@ -40,15 +41,20 @@ namespace WindowsFormsApp1
         private void 检测设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SensorSetting subform = new SensorSetting();
-            subform.MdiParent = this;
-            subform.Show();
+            subform.StartPosition = FormStartPosition.CenterScreen;
+            //subform.MdiParent = this;
+            //subform.Show()
+            subform.ShowDialog();
         }
 
         private void 历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HistoryData subform = new HistoryData();
-            subform.MdiParent = this;
+            subform.TopLevel = false;
+            subform.Parent = this.panel1;
+            subform.StartPosition = FormStartPosition.CenterScreen;
             subform.Show();
+            subform.BringToFront();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
