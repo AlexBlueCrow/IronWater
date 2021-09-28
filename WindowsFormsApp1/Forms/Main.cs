@@ -20,9 +20,10 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-
-
+        public delegate void MyDelegate(string s);
         
+
+
 
         public Form1()
         {
@@ -30,7 +31,7 @@ namespace WindowsFormsApp1
             var myModel = new PlotModel { Title = "Example 1" };
             myModel.Series.Add(new FunctionSeries(Math.Cos, 0, 10, 0.1, "cos(x)"));
             this.plotView1.Model = myModel;
-
+            Thread Test = new Thread(TestThread);
             
 
             
@@ -40,17 +41,51 @@ namespace WindowsFormsApp1
             DateTime now = System.DateTime.Now;
             string str_now = now.ToString()+"testflag";
 
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             Console.WriteLine("---------Main_Load--------");
+
+
             timer1.Start();
             SettingInit();
-            
 
+            serialPort1.ReceivedBytesThreshold = 1;
+            serialPort1.PortName = "COM1";
+            serialPort1.BaudRate = 9600;
+            serialPort1.Open();//打开串口
+            serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(serialPort1_DataReceived);
 
         }
+
+        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                int len = serialPort1.BytesToRead;
+                Byte[] buf = new byte[len];
+                int length = serialPort1.Read(buf, 0, len);
+                string result = System.Text.Encoding.ASCII.GetString(buf);
+                MyDelegate dele1 = new MyDelegate(UpdateText);
+                dele1(result);
+            }
+            catch (Exception ex)
+            {
+                MyDelegate dele1 = new MyDelegate(UpdateText);
+                dele1(ex.Message);
+            }
+        }
+
+       
+        
+
+        public void UpdateText(string text)
+        {
+            this.label3.Text = text;
+        }
+
 
         private void 系统设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
