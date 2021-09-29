@@ -32,6 +32,7 @@ namespace WindowsFormsApp1
             myModel.Series.Add(new FunctionSeries(Math.Cos, 0, 10, 0.1, "cos(x)"));
             this.plotView1.Model = myModel;
             Thread Test = new Thread(TestThread);
+            var dele = new MyDelegate(UpdateText);
             
 
             
@@ -42,6 +43,11 @@ namespace WindowsFormsApp1
             string str_now = now.ToString()+"testflag";
 
 
+        }
+
+        public void UpdateText(string text)
+        {
+            this.label3.Text = text;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -68,23 +74,22 @@ namespace WindowsFormsApp1
                 Byte[] buf = new byte[len];
                 int length = serialPort1.Read(buf, 0, len);
                 string result = System.Text.Encoding.ASCII.GetString(buf);
-                MyDelegate dele1 = new MyDelegate(UpdateText);
-                dele1(result);
+                label3.BeginInvoke(new MyDelegate(UpdateText),result);
+                
             }
             catch (Exception ex)
             {
-                MyDelegate dele1 = new MyDelegate(UpdateText);
-                dele1(ex.Message);
+                //MyDelegate dele1 = new MyDelegate(UpdateText);
+                string result = ex.Message;
+                label3.BeginInvoke(new MyDelegate(UpdateText),result);
+
             }
         }
 
        
         
 
-        public void UpdateText(string text)
-        {
-            this.label3.Text = text;
-        }
+      
 
 
         private void 系统设置ToolStripMenuItem_Click(object sender, EventArgs e)
