@@ -37,13 +37,15 @@ namespace WindowsFormsApp1
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.plotView1 = new OxyPlot.WindowsForms.PlotView();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.serialPort2 = new System.IO.Ports.SerialPort(this.components);
-            this.label3 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -106,6 +108,7 @@ namespace WindowsFormsApp1
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.label2);
@@ -114,6 +117,16 @@ namespace WindowsFormsApp1
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1475, 748);
             this.panel1.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(105, 669);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(69, 19);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "label3";
             // 
             // button2
             // 
@@ -151,15 +164,19 @@ namespace WindowsFormsApp1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
-            // label3
+            // serialPort2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(105, 669);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 19);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "label3";
+            this.serialPort2.PortName = "COM2";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(468, 670);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 9;
+            this.button3.Text = "sendSig";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 
@@ -200,6 +217,8 @@ namespace WindowsFormsApp1
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.Label label3;
         private System.IO.Ports.SerialPort serialPort2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

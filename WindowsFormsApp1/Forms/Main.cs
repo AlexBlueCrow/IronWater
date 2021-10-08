@@ -31,8 +31,14 @@ namespace WindowsFormsApp1
             var myModel = new PlotModel { Title = "Example 1" };
             myModel.Series.Add(new FunctionSeries(Math.Cos, 0, 10, 0.1, "cos(x)"));
             this.plotView1.Model = myModel;
+
             Thread Test = new Thread(TestThread);
             var dele = new MyDelegate(UpdateText);
+
+            var TestLine = new PlotModel { Title = "TestLine" };
+            TestLine.Series.Add(new FunctionSeries(Math.Sin, 0, 10, 0.2, "sin(x)"));
+            TestLine.Series.Add(new FunctionSeries(Math.Cos, 0, 10, 0.1, "cos(x)"));
+            this.plotView1.Model = TestLine;
             
 
             
@@ -64,6 +70,9 @@ namespace WindowsFormsApp1
             serialPort1.Open();//打开串口
             serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(serialPort1_DataReceived);
 
+            serialPort2.PortName = "COM2";
+            serialPort2.Open();
+
         }
 
         private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
@@ -74,7 +83,11 @@ namespace WindowsFormsApp1
                 Byte[] buf = new byte[len];
                 int length = serialPort1.Read(buf, 0, len);
                 string result = System.Text.Encoding.ASCII.GetString(buf);
+
                 label3.BeginInvoke(new MyDelegate(UpdateText),result);
+                
+
+                
                 
             }
             catch (Exception ex)
@@ -141,6 +154,26 @@ namespace WindowsFormsApp1
         private void button2_Click(object sender, EventArgs e)
         {
             Thread Test = new Thread(TestThread);
+        }
+
+       
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            System.Timers.Timer t = new System.Timers.Timer(100);
+            t.Elapsed += new System.Timers.ElapsedEventHandler(tick);
+            t.AutoReset = true;
+            t.Enabled = true;
+            t.Start();
+            
+        }
+
+        private void tick(object source, System.Timers.ElapsedEventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+            float sec = dt.Second;
+            string msg = System.Math.Sin(sec * 3 / 180).ToString();
+            this.serialPort2.WriteLine(msg);
         }
     }
 }
