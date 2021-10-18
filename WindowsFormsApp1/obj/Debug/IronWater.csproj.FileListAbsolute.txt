@@ -63,3 +63,5 @@ D:\working place\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
 D:\working place\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Forms.HistoryData.resources
 D:\working place\WindowsFormsApp1\bin\Debug\System.IO.Ports.dll
 D:\working place\WindowsFormsApp1\bin\Debug\System.IO.Ports.xml
+D:\working place\WindowsFormsApp1\bin\Debug\NModbus.dll
+D:\working place\WindowsFormsApp1\bin\Debug\NModbus.xml

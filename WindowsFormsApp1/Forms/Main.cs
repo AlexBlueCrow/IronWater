@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using WindowsFormsApp1.Forms;
 using OxyPlot;
 using OxyPlot.Series;
+using OxyPlot.Axes;
+
 using System.IO.Ports;
 using System.Threading;
 
@@ -20,24 +22,73 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public delegate void MyDelegate(string s);
         
+        public delegate void RefreshDelegate();
 
+        private DateTimeAxis _dateAxis;//X轴
+        private LinearAxis _valueAxis;//Y轴
+        private PlotModel TestLine = new PlotModel { Title = "TestLine" };
+
+        LineSeries line1 = new LineSeries()
+        {
+            Title = $"温度",
+            Color = OxyPlot.OxyColors.Blue,
+            StrokeThickness = 2,
+            MarkerSize = 3,
+            MarkerStroke = OxyColors.DarkGreen,
+
+        };
+
+        LineSeries line2 = new LineSeries()
+        {
+            Title = $"电压",
+            Color = OxyPlot.OxyColors.Red,
+            StrokeThickness = 2,
+            MarkerSize = 3,
+            MarkerStroke = OxyColors.Red,
+            MarkerType = MarkerType.Circle,
+
+        };
 
 
         public Form1()
         {
             InitializeComponent();
-            var myModel = new PlotModel { Title = "Example 1" };
-            myModel.Series.Add(new FunctionSeries(Math.Cos, 0, 10, 0.1, "cos(x)"));
-            this.plotView1.Model = myModel;
+            
 
             Thread Test = new Thread(TestThread);
-            var dele = new MyDelegate(UpdateText);
 
-            var TestLine = new PlotModel { Title = "TestLine" };
-            TestLine.Series.Add(new FunctionSeries(Math.Sin, 0, 10, 0.2, "sin(x)"));
-            TestLine.Series.Add(new FunctionSeries(Math.Cos, 0, 10, 0.1, "cos(x)"));
+            
+            
+            var maxValue = DateTimeAxis.ToDouble(DateTime.Now.AddMinutes(0));
+            var minValue = DateTimeAxis.ToDouble(DateTime.Now.AddMinutes(-20));
+
+            TestLine.Axes.Add(new DateTimeAxis()
+            {
+                Position = AxisPosition.Bottom,
+                Minimum = minValue,
+                Maximum = maxValue,
+                //IntervalType = DateTimeIntervalType.Minutes,
+            });
+
+            _valueAxis = new LinearAxis()
+            {
+                MajorGridlineStyle = LineStyle.Solid,
+                MinorGridlineStyle = LineStyle.Dot,
+                IntervalLength = 80,
+                Angle = 0,
+                IsZoomEnabled = false,
+                IsPanEnabled = false,
+                Maximum = 1,
+                Minimum = -1,
+                Title = "数值"
+            };
+            TestLine.Axes.Add(_valueAxis);
+
+
+            TestLine.Series.Add(line1);
+
+
             this.plotView1.Model = TestLine;
             
 
@@ -51,9 +102,16 @@ namespace WindowsFormsApp1
 
         }
 
-        public void UpdateText(string text)
+        public void UpdateText(string text, LineSeries line)
         {
-            this.label3.Text = text;
+            double t = DateTimeAxis.ToDouble(DateTime.Now);
+            double value = double.Parse(text);
+            line.Points.Add(new DataPoint(t, value));
+        }
+
+        public void UpdatePlot(string text, LineSeries line)
+        {
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -66,6 +124,7 @@ namespace WindowsFormsApp1
 
             serialPort1.ReceivedBytesThreshold = 1;
             serialPort1.PortName = "COM1";
+
             serialPort1.BaudRate = 9600;
             serialPort1.Open();//打开串口
             serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(serialPort1_DataReceived);
@@ -79,22 +138,31 @@ namespace WindowsFormsApp1
         {
             try
             {
+                Console.WriteLine("datareceived");
                 int len = serialPort1.BytesToRead;
                 Byte[] buf = new byte[len];
                 int length = serialPort1.Read(buf, 0, len);
                 string result = System.Text.Encoding.ASCII.GetString(buf);
-
-                label3.BeginInvoke(new MyDelegate(UpdateText),result);
                 
-
+                double value = double.Parse(result);
+                double t = DateTimeAxis.ToDouble(DateTime.Now);
+                double res1 = System.Math.Sin(t / 60);
                 
+                line1.Points.Add(new DataPoint(t, value));
+                
+                var date = DateTime.Now;
+                TestLine.Axes[0].Maximum = DateTimeAxis.ToDouble(date.AddSeconds(1));
+                TestLine.Axes[0].Minimum = DateTimeAxis.ToDouble(date.AddSeconds(-599));
+                Console.WriteLine(result);
+                plotView1.InvalidatePlot(true);
+
                 
             }
             catch (Exception ex)
             {
                 //MyDelegate dele1 = new MyDelegate(UpdateText);
                 string result = ex.Message;
-                label3.BeginInvoke(new MyDelegate(UpdateText),result);
+                
 
             }
         }
@@ -164,7 +232,9 @@ namespace WindowsFormsApp1
             t.Elapsed += new System.Timers.ElapsedEventHandler(tick);
             t.AutoReset = true;
             t.Enabled = true;
+            Console.Write( "----timer start-----" );
             t.Start();
+            
             
         }
 
@@ -172,8 +242,11 @@ namespace WindowsFormsApp1
         {
             DateTime dt = DateTime.Now;
             float sec = dt.Second;
-            string msg = System.Math.Sin(sec * 3 / 180).ToString();
+            string msg = System.Math.Sin(sec *3 / 180 *3.14).ToString();
+            Console.WriteLine( "--port writeline-" );
             this.serialPort2.WriteLine(msg);
         }
+
+
     }
 }
