@@ -31,14 +31,15 @@ namespace WindowsFormsApp1.Forms
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Save = new System.Windows.Forms.Button();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.Box_Ttype = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.SaveSetting = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -46,8 +47,8 @@ namespace WindowsFormsApp1.Forms
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -68,10 +69,10 @@ namespace WindowsFormsApp1.Forms
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.Save);
             this.tabPage1.Controls.Add(this.comboBox3);
             this.tabPage1.Controls.Add(this.comboBox2);
-            this.tabPage1.Controls.Add(this.comboBox1);
+            this.tabPage1.Controls.Add(this.Box_Ttype);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.label2);
@@ -83,14 +84,15 @@ namespace WindowsFormsApp1.Forms
             this.tabPage1.Text = "型号设置";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // Save
             // 
-            this.button1.Location = new System.Drawing.Point(271, 257);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "保存修改";
-            this.button1.UseVisualStyleBackColor = true;
+            this.Save.Location = new System.Drawing.Point(271, 257);
+            this.Save.Name = "Save";
+            this.Save.Size = new System.Drawing.Size(75, 23);
+            this.Save.TabIndex = 3;
+            this.Save.Text = "保存设置";
+            this.Save.UseVisualStyleBackColor = true;
+            this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // comboBox3
             // 
@@ -110,14 +112,14 @@ namespace WindowsFormsApp1.Forms
             this.comboBox2.Size = new System.Drawing.Size(121, 20);
             this.comboBox2.TabIndex = 2;
             // 
-            // comboBox1
+            // Box_Ttype
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(257, 71);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 20);
-            this.comboBox1.TabIndex = 2;
+            this.Box_Ttype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_Ttype.FormattingEnabled = true;
+            this.Box_Ttype.Location = new System.Drawing.Point(257, 71);
+            this.Box_Ttype.Name = "Box_Ttype";
+            this.Box_Ttype.Size = new System.Drawing.Size(121, 20);
+            this.Box_Ttype.TabIndex = 2;
             // 
             // label3
             // 
@@ -151,6 +153,7 @@ namespace WindowsFormsApp1.Forms
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.SaveSetting);
             this.tabPage2.Controls.Add(this.textBox3);
             this.tabPage2.Controls.Add(this.textBox2);
             this.tabPage2.Controls.Add(this.textBox1);
@@ -164,6 +167,16 @@ namespace WindowsFormsApp1.Forms
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "模块地址设置";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // SaveSetting
+            // 
+            this.SaveSetting.Location = new System.Drawing.Point(227, 269);
+            this.SaveSetting.Name = "SaveSetting";
+            this.SaveSetting.Size = new System.Drawing.Size(75, 23);
+            this.SaveSetting.TabIndex = 2;
+            this.SaveSetting.Text = "保存设置";
+            this.SaveSetting.UseVisualStyleBackColor = true;
+            this.SaveSetting.Click += new System.EventHandler(this.Save_Click);
             // 
             // textBox3
             // 
@@ -185,6 +198,7 @@ namespace WindowsFormsApp1.Forms
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 21);
             this.textBox1.TabIndex = 1;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label6
             // 
@@ -228,16 +242,6 @@ namespace WindowsFormsApp1.Forms
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(131, 206);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -248,6 +252,16 @@ namespace WindowsFormsApp1.Forms
             this.label7.TabIndex = 1;
             this.label7.Text = "label7";
             this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(131, 206);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // SensorSetting
             // 
@@ -274,10 +288,10 @@ namespace WindowsFormsApp1.Forms
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Save;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox Box_Ttype;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox3;
@@ -289,5 +303,6 @@ namespace WindowsFormsApp1.Forms
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button SaveSetting;
     }
 }

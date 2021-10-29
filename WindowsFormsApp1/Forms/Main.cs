@@ -12,8 +12,13 @@ using OxyPlot;
 using OxyPlot.Series;
 using OxyPlot.Axes;
 
+using NModbus;
+using NModbus.Extensions;
+using System.Net.Sockets;
 using System.IO.Ports;
 using System.Threading;
+using Modbus.Device;
+using System.Configuration;
 
 
 
@@ -24,33 +29,63 @@ namespace WindowsFormsApp1
     {
         
         public delegate void RefreshDelegate();
+        private DateTimeAxis _dateAxis; //X轴
+        private LinearAxis   _TemAxis;    //Y轴
+        private LinearAxis   _mVAxis;
+        private PlotModel plotModel = new PlotModel 
+        { 
+            Title = "plotModel",
+            DefaultFont = "微软雅黑",
 
-        private DateTimeAxis _dateAxis;//X轴
-        private LinearAxis _valueAxis;//Y轴
-        private PlotModel TestLine = new PlotModel { Title = "TestLine" };
+        };
+        
 
-        LineSeries line1 = new LineSeries()
+        LineSeries line_Tem = new LineSeries()
         {
             Title = $"温度",
-            Color = OxyPlot.OxyColors.Blue,
-            StrokeThickness = 2,
-            MarkerSize = 3,
-            MarkerStroke = OxyColors.DarkGreen,
+            Color = OxyPlot.OxyColors.Red,
+            StrokeThickness = 1,
+            MarkerSize = 2,
+            MarkerStroke = OxyColors.Red,
+            MarkerType = MarkerType.Triangle,
 
         };
 
-        LineSeries line2 = new LineSeries()
+        LineSeries line_O = new LineSeries()
         {
-            Title = $"电压",
-            Color = OxyPlot.OxyColors.Red,
-            StrokeThickness = 2,
-            MarkerSize = 3,
-            MarkerStroke = OxyColors.Red,
+            Title = $"氧电压",
+            Color = OxyPlot.OxyColors.Green,
+            StrokeThickness = 1,
+            MarkerSize = 2,
+            MarkerStroke = OxyColors.Green,
             MarkerType = MarkerType.Circle,
 
         };
 
+        LineSeries line_P = new LineSeries()
+        {
+            Title = $"磷电压",
+            Color = OxyPlot.OxyColors.Blue,
+            StrokeThickness = 1,
+            MarkerSize = 2,
+            MarkerStroke = OxyColors.Red,
+            MarkerType = MarkerType.Triangle,
 
+        };
+
+
+        /// <summary>
+        /// /////
+        /// </summary>
+        public string ipAddress = "192.168.0.20";
+        public int tcpPort = 8000;
+        public static TcpClient tcpClient = new TcpClient();
+
+
+
+        /// <summary>
+        /// //////////
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -63,7 +98,7 @@ namespace WindowsFormsApp1
             var maxValue = DateTimeAxis.ToDouble(DateTime.Now.AddMinutes(0));
             var minValue = DateTimeAxis.ToDouble(DateTime.Now.AddMinutes(-20));
 
-            TestLine.Axes.Add(new DateTimeAxis()
+            plotModel.Axes.Add(new DateTimeAxis()
             {
                 Position = AxisPosition.Bottom,
                 Minimum = minValue,
@@ -71,7 +106,7 @@ namespace WindowsFormsApp1
                 //IntervalType = DateTimeIntervalType.Minutes,
             });
 
-            _valueAxis = new LinearAxis()
+            _TemAxis = new LinearAxis()
             {
                 MajorGridlineStyle = LineStyle.Solid,
                 MinorGridlineStyle = LineStyle.Dot,
@@ -79,17 +114,20 @@ namespace WindowsFormsApp1
                 Angle = 0,
                 IsZoomEnabled = false,
                 IsPanEnabled = false,
-                Maximum = 1,
-                Minimum = -1,
-                Title = "数值"
+                Maximum = 1900,
+                Minimum = 0,
+                Title = "温度"
             };
-            TestLine.Axes.Add(_valueAxis);
+            
+            plotModel.Axes.Add(_TemAxis);
 
 
-            TestLine.Series.Add(line1);
+            plotModel.Series.Add(line_Tem);
+            plotModel.Series.Add(line_P);
+            plotModel.Series.Add(line_O);
+            
 
-
-            this.plotView1.Model = TestLine;
+            this.plotView1.Model = plotModel;
             
 
             
@@ -98,7 +136,6 @@ namespace WindowsFormsApp1
         {
             DateTime now = System.DateTime.Now;
             string str_now = now.ToString()+"testflag";
-
 
         }
 
@@ -148,11 +185,11 @@ namespace WindowsFormsApp1
                 double t = DateTimeAxis.ToDouble(DateTime.Now);
                 double res1 = System.Math.Sin(t / 60);
                 
-                line1.Points.Add(new DataPoint(t, value));
-                
+                line_Tem.Points.Add(new DataPoint(t, value));
+                plotView1.InvalidatePlot(true);
                 var date = DateTime.Now;
-                TestLine.Axes[0].Maximum = DateTimeAxis.ToDouble(date.AddSeconds(1));
-                TestLine.Axes[0].Minimum = DateTimeAxis.ToDouble(date.AddSeconds(-599));
+                plotModel.Axes[0].Maximum = DateTimeAxis.ToDouble(date.AddSeconds(1));
+                plotModel.Axes[0].Minimum = DateTimeAxis.ToDouble(date.AddSeconds(-599));
                 Console.WriteLine(result);
                 plotView1.InvalidatePlot(true);
 
@@ -175,12 +212,10 @@ namespace WindowsFormsApp1
 
         private void 系统设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
             SysSetting subform = new SysSetting();
             //subform.MdiParent = this;
             subform.StartPosition = FormStartPosition.CenterScreen;
             subform.ShowDialog();
-
 
         }
 
@@ -196,12 +231,14 @@ namespace WindowsFormsApp1
 
         private void 历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             HistoryData subform = new HistoryData();
             subform.TopLevel = false;
             subform.Parent = this.panel1;
             subform.StartPosition = FormStartPosition.CenterScreen;
             subform.Show();
             subform.BringToFront();
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -228,23 +265,133 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            System.Timers.Timer t = new System.Timers.Timer(100);
+            System.Timers.Timer t = new System.Timers.Timer(1000);
             t.Elapsed += new System.Timers.ElapsedEventHandler(tick);
             t.AutoReset = true;
             t.Enabled = true;
             Console.Write( "----timer start-----" );
             t.Start();
+            return;
             
             
         }
 
+
         private void tick(object source, System.Timers.ElapsedEventArgs e)
         {
-            DateTime dt = DateTime.Now;
-            float sec = dt.Second;
-            string msg = System.Math.Sin(sec *3 / 180 *3.14).ToString();
-            Console.WriteLine( "--port writeline-" );
-            this.serialPort2.WriteLine(msg);
+            try
+            {
+                if (!tcpClient.Connected)
+                {
+                    tcpClient.Connect(ipAddress, tcpPort);
+                }
+                
+            }
+            finally
+            {
+                ModbusIpMaster master = ModbusIpMaster.CreateIp(tcpClient);
+                ushort startRef, noOfRefs;
+                startRef = 0;
+                noOfRefs = 8;
+
+                byte slaveID = 01;
+                ushort[] outputRegisterData = master.ReadHoldingRegisters(slaveID, startRef, noOfRefs);
+                string output = String.Join(" | ", outputRegisterData);
+                
+                double t = DateTimeAxis.ToDouble(DateTime.Now);
+
+                var date = DateTime.Now;
+                plotModel.Axes[0].Maximum = DateTimeAxis.ToDouble(date.AddSeconds(1));
+                plotModel.Axes[0].Minimum = DateTimeAxis.ToDouble(date.AddSeconds(-599));
+
+                float value_00 = convertor(outputRegisterData[0], 03);
+                float value_01 = convertor(outputRegisterData[1], 03);
+                float value_02 = convertor(outputRegisterData[2], 03);
+                line_Tem.Points.Add(new DataPoint( t , value_00 ));
+                line_O.Points.Add(new DataPoint(t, value_01));
+                line_O.Points.Add(new DataPoint(t, value_02));
+                Console.WriteLine(value_00);
+
+                plotView1.InvalidatePlot(true);
+            }
+
+
+        }
+
+        private float convertor(int value,int type)
+        {
+            float max, min;
+            switch (type)
+            {
+                case 0:
+                    max = 15;
+                    min = -15;
+                    break;
+                case 1:
+                    max = 50;
+                    min = -50;
+                    break;
+                case 02:
+                    max = 100;
+                    min = -100;
+                    break;
+                case 03:
+                    max = 500;
+                    min = -500;
+                    break;
+                case 04:
+                    max = 1000;
+                    min = -1000;
+                    break;
+                case 05:
+                    max = 2500;
+                    min = 0;
+                    break;
+                case 06:
+                    max = 20;
+                    min = -20;
+                    break;
+                case 07:
+                    max = 20;
+                    min = 4;
+                    break;
+                case 08:
+                    max = 1100;
+                    min = -200;
+                    break;
+                case 09:
+                    max = 1400;
+                    min = -250;
+                    break;
+                case 10:
+                    max = 400;
+                    min = -250;
+                    break;
+                case 11:
+                    max = 900;
+                    min = -250;
+                    break;
+                case 12:
+                    max = 1750;
+                    min = 0;
+                    break;
+                case 13:
+                    max = 1750;
+                    min = 0;
+                    break;
+                case 14:
+                    max = 1800;
+                    min = 0;
+                    break;
+                case 15:
+                    max = 1300;
+                    min = -250;
+                    break;
+
+            }
+
+            float res = value * ( max - min ) / 65535 + (min);
+            return res;
         }
 
 

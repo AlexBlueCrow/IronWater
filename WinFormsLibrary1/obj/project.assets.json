@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\working place\\WinFormsLibrary1\\WinFormsLibrary1.csproj",
-      "projectName": "WinFormsLibrary1",
-      "projectPath": "D:\\working place\\WinFormsLibrary1\\WinFormsLibrary1.csproj",
+      "projectUniqueName": "D:\\working place\\WinFormsLibrary1\\Modbus.csproj",
+      "projectName": "Modbus",
+      "projectPath": "D:\\working place\\WinFormsLibrary1\\Modbus.csproj",
       "packagesPath": "C:\\Users\\proco\\.nuget\\packages\\",
       "outputPath": "D:\\working place\\WinFormsLibrary1\\obj\\",
       "projectStyle": "PackageReference",
@@ -63,7 +63,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

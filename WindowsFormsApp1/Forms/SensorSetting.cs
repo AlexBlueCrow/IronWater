@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace WindowsFormsApp1.Forms
 {
@@ -35,6 +36,18 @@ namespace WindowsFormsApp1.Forms
         private void label7_Click(object sender, EventArgs e)
         {
            
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            string type = this.Box_Ttype.Text;
+
+
         }
     }
 }

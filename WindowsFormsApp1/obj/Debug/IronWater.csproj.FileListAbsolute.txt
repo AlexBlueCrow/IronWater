@@ -65,3 +65,5 @@ D:\working place\WindowsFormsApp1\bin\Debug\System.IO.Ports.dll
 D:\working place\WindowsFormsApp1\bin\Debug\System.IO.Ports.xml
 D:\working place\WindowsFormsApp1\bin\Debug\NModbus.dll
 D:\working place\WindowsFormsApp1\bin\Debug\NModbus.xml
+D:\working place\WindowsFormsApp1\bin\Debug\NModbus4.dll
+D:\working place\WindowsFormsApp1\bin\Debug\NModbus4.xml

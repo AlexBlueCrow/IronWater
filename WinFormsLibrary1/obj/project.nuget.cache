@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fMW3j4KXhkcQ8UbrPSj960+e1u3i7KxZrQ9Mze0hU3bn13TQ1u5xBFM1daPccQj29Jfo5JrDhIniM2nVBF3SEg==",
+  "dgSpecHash": "KEjnXngIttggzLIWjYrT1ymYLSxq16hC3xs9Z1K4eNcY1Dkq5nZP8db0GCUm6mtsqNnKIfEWWziRGGC/lSXB4A==",
   "success": true,
-  "projectFilePath": "D:\\working place\\WinFormsLibrary1\\WinFormsLibrary1.csproj",
+  "projectFilePath": "D:\\working place\\WinFormsLibrary1\\Modbus.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
