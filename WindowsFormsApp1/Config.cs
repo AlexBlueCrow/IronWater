@@ -11,11 +11,7 @@ namespace WindowsFormsApp1
 {
     class Config
     {
-        class Program
-        {
-            
-
-            static void ReadAllSettings()
+            public static void ReadAllSettings()
             {
                 try
                 {   
@@ -39,21 +35,24 @@ namespace WindowsFormsApp1
                 }
             }
 
-            static void ReadSetting(string key)
+            public static string ReadSetting(string key)
             {
                 try
                 {
                     var appSettings = ConfigurationManager.AppSettings;
                     string result = appSettings[key] ?? "Not Found";
-                    Console.WriteLine(result);
+                    return result;
+                    
                 }
                 catch (ConfigurationErrorsException)
                 {
                     Console.WriteLine("Error reading app settings");
+                return "";
+
                 }
             }
 
-            static void AddUpdateAppSettings(string key, string value)
+            public static void AddUpdateAppSettings(string key, string value)
             {
                 try
                 {
@@ -76,5 +75,5 @@ namespace WindowsFormsApp1
                 }
             }
         }
-    }
+    
 }

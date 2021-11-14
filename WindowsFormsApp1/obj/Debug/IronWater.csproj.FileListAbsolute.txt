@@ -39,8 +39,6 @@ D:\work\IronWater\IronWater\WindowsFormsApp1\obj\Debug\IronWater.csproj.CopyComp
 D:\work\IronWater\IronWater\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 D:\work\IronWater\IronWater\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
 D:\work\IronWater\IronWater\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Forms.DataBaseSetting.resources
-D:\working place\WindowsFormsApp1\bin\Debug\ConfigurationData.mdf
-D:\working place\WindowsFormsApp1\bin\Debug\ConfigurationData_log.ldf
 D:\working place\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
 D:\working place\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
 D:\working place\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
@@ -48,7 +46,6 @@ D:\working place\WindowsFormsApp1\bin\Debug\OxyPlot.dll
 D:\working place\WindowsFormsApp1\bin\Debug\OxyPlot.WindowsForms.dll
 D:\working place\WindowsFormsApp1\bin\Debug\OxyPlot.xml
 D:\working place\WindowsFormsApp1\bin\Debug\OxyPlot.WindowsForms.xml
-D:\working place\WindowsFormsApp1\obj\Debug\IronWater.csproj.AssemblyReference.cache
 D:\working place\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Forms.DataBaseSetting.resources
 D:\working place\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Forms.PswdSetting.resources
 D:\working place\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
@@ -67,3 +64,26 @@ D:\working place\WindowsFormsApp1\bin\Debug\NModbus.dll
 D:\working place\WindowsFormsApp1\bin\Debug\NModbus.xml
 D:\working place\WindowsFormsApp1\bin\Debug\NModbus4.dll
 D:\working place\WindowsFormsApp1\bin\Debug\NModbus4.xml
+D:\working place\WindowsFormsApp1\bin\Debug\System.Configuration.ConfigurationManager.dll
+D:\working place\WindowsFormsApp1\bin\Debug\System.Security.AccessControl.dll
+D:\working place\WindowsFormsApp1\bin\Debug\System.Security.Permissions.dll
+D:\working place\WindowsFormsApp1\bin\Debug\System.Security.Principal.Windows.dll
+D:\working place\WindowsFormsApp1\bin\Debug\System.Configuration.ConfigurationManager.xml
+D:\working place\WindowsFormsApp1\bin\Debug\System.Security.AccessControl.xml
+D:\working place\WindowsFormsApp1\bin\Debug\System.Security.Permissions.xml
+D:\working place\WindowsFormsApp1\bin\Debug\System.Security.Principal.Windows.xml
+D:\working place\WindowsFormsApp1\bin\Debug\MySqlConnector.dll
+D:\working place\WindowsFormsApp1\bin\Debug\System.Buffers.dll
+D:\working place\WindowsFormsApp1\bin\Debug\System.Memory.dll
+D:\working place\WindowsFormsApp1\bin\Debug\System.Numerics.Vectors.dll
+D:\working place\WindowsFormsApp1\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\working place\WindowsFormsApp1\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\working place\WindowsFormsApp1\bin\Debug\MySqlConnector.xml
+D:\working place\WindowsFormsApp1\bin\Debug\System.Buffers.xml
+D:\working place\WindowsFormsApp1\bin\Debug\System.Memory.xml
+D:\working place\WindowsFormsApp1\bin\Debug\System.Numerics.Vectors.xml
+D:\working place\WindowsFormsApp1\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\working place\WindowsFormsApp1\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\working place\WindowsFormsApp1\bin\Debug\dbfile\Database1.mdf
+D:\working place\WindowsFormsApp1\bin\Debug\dbfile\Database1_log.ldf
+D:\working place\WindowsFormsApp1\obj\Debug\IronWater.csproj.AssemblyReference.cache

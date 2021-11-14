@@ -13,7 +13,10 @@ namespace WindowsFormsApp1
         SqlConnection connection;
         public SqlConnection connect()
         {
-            string str = @"Data Source=xxxx; Initial Catalog=BookDB;Integrated Security = True";
+            string str = @"Data Source=(LocalDB)\MSSQLLocalDB;
+                           
+                           Integrated Security = True;
+                           AttachDbFilename='D:\working place\WindowsFormsApp1\Database1.mdf'";
             SqlConnection connection = new SqlConnection(str);
             connection.Open();
             return connection;
