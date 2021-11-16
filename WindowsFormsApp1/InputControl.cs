@@ -13,7 +13,7 @@ namespace WindowsFormsApp1
         public static bool CheckDigitFormat(TextBox tb, KeyPressEventArgs e)
         {
             bool flag = false;
-            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar) && e.KeyChar != 46)
+            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar) && e.KeyChar != 46 && e.KeyChar != 45)
             {
                 flag = true;
 

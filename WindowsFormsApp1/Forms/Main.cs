@@ -185,9 +185,10 @@ namespace WindowsFormsApp1
             this.WindowState = FormWindowState.Maximized;
             Console.WriteLine("---------Main_Load--------");
             ConfigInit();
+            SettingInit();
             DataBaseInit();
             TimerInit();
-            SettingInit();
+            
             OxyInit(true);
             //timer1.Start();
 
@@ -244,11 +245,12 @@ namespace WindowsFormsApp1
             try
             {
                 int period = int.Parse(Config.ReadSetting("period"));
+                //Console.WriteLine(period);
                 read_timer.Interval = period;
             }
             catch
             {
-                Console.WriteLine(Config.ReadSetting("period"));
+                //Console.WriteLine(Config.ReadSetting("period"));
 
             }
         }
@@ -260,6 +262,8 @@ namespace WindowsFormsApp1
         private void DataBaseInit()
         {
             //constr = Properties.Settings.Default.ConfigurationDataConnectionString;
+            string dbfile = Environment.CurrentDirectory;
+            
             constr = "Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = 'D:\\working place\\WindowsFormsApp1\\dbfile\\Database1.mdf'; Integrated Security = True";
             string conName = "WindowsFormsApp1.Properties.Settings.ConfigurationDataConnectionString";
             //constr = ConfigurationManager.ConnectionStrings[conName].ConnectionString;
@@ -273,9 +277,25 @@ namespace WindowsFormsApp1
             string portnum = "8000";
             Config.AddUpdateAppSettings("modbusIp", ip);
             Config.AddUpdateAppSettings("portNum", portnum);
+
+            try
+            {
+                string Axis_Tem_max = Config.ReadSetting("Axis_Tem_max");
+                int T_ax = Convert.ToInt32(float.Parse(Axis_Tem_max));
+            }
+            catch
+            {
+                MessageBox.Show("未检测到设置文件，初始化为默认配置");
+                Config.AddUpdateAppSettings("Axis_Tem_max","1800");
+                Config.AddUpdateAppSettings("Axis_Tem_min","0");
+                Config.AddUpdateAppSettings("Axis_mV_max","500");
+                Config.AddUpdateAppSettings("Axis_mV_min","-500");
+                Config.AddUpdateAppSettings("timeSpan","20");
+                Config.AddUpdateAppSettings("ThermalType","B");
+                Config.AddUpdateAppSettings("pericd", "500");
+
+            }
             
-
-
         }
 
         public void OxyInit(bool resettime)
@@ -381,6 +401,7 @@ namespace WindowsFormsApp1
             }
             finally
             {
+               
                 ModbusIpMaster master = ModbusIpMaster.CreateIp(tcpClient);
                 ushort startRef, noOfRefs;
                 startRef = 0;
@@ -432,7 +453,7 @@ namespace WindowsFormsApp1
                 {
                     int i = cmd.ExecuteNonQuery();
                 }
-
+                
                 //connection.Close();
                 
                 /*if (i == 0)

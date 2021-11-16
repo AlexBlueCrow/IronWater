@@ -126,7 +126,7 @@ namespace WindowsFormsApp1
                     break;
 
             }
-            Console.WriteLine(res);
+            
             return res;
         }
 

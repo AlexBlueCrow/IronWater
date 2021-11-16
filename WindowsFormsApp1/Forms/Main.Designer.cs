@@ -221,7 +221,7 @@ namespace WindowsFormsApp1
             this.plotView1.PanCursor = System.Windows.Forms.Cursors.Hand;
             this.plotView1.Size = new System.Drawing.Size(1517, 771);
             this.plotView1.TabIndex = 13;
-            this.plotView1.Text = "plotView1";
+            this.plotView1.Text = "实时检测";
             this.plotView1.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
             this.plotView1.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
             this.plotView1.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;

@@ -50,7 +50,7 @@ namespace WindowsFormsApp1.Forms
         };   //Y轴
 
 
-        private static LinearAxis _mVAxisHistory = new LinearAxis()
+        private static LinearAxis _mVAxisHistory_H = new LinearAxis()
         {
             Position = AxisPosition.Right,
             MajorGridlineStyle = LineStyle.Solid,
@@ -108,9 +108,12 @@ namespace WindowsFormsApp1.Forms
         };
 
 
+
+
         public HistoryData()
         {
             InitializeComponent();
+
             
         }
 
@@ -119,6 +122,7 @@ namespace WindowsFormsApp1.Forms
             ///oxyplot init
             var maxValue = DateTimeAxis.ToDouble(DateTime.Now.AddMinutes(0));
             var minValue = DateTimeAxis.ToDouble(DateTime.Now.AddMinutes(-20));
+
 
             plotModel.Axes.Add(new DateTimeAxis()
             {
@@ -129,7 +133,7 @@ namespace WindowsFormsApp1.Forms
             });
 
             plotModel.Axes.Add(_TemAxisHistory);
-            plotModel.Axes.Add(_mVAxisHistory);
+            plotModel.Axes.Add(_mVAxisHistory_H);
             plotModel.Series.Add(line_Tem_H);
             plotModel.Series.Add(line_P_H);
             plotModel.Series.Add(line_O_H);
@@ -247,6 +251,11 @@ namespace WindowsFormsApp1.Forms
 
             TextBox target = (TextBox)sender;
             e.Handled = InputControl.CheckDigitFormat(target, e);
+        }
+
+        private void HistoryData_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
         }
     }
 }

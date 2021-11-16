@@ -120,6 +120,7 @@ namespace WindowsFormsApp1.Forms
             this.Controls.Add(this.dateTimePicker1);
             this.Name = "HistoryData";
             this.Text = "HistoryData";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HistoryData_FormClosing);
             this.Load += new System.EventHandler(this.HistoryData_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronWater", "WindowsFormsApp1\IronWater.csproj", "{6437D3DF-49B5-4CD9-BE92-384B45A593F1}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup11.14", "Setup11.14\Setup11.14.vdproj", "{3A4D3935-2D67-43AC-B4BB-F80EDE3581AA}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "proco_11.15", "proco_11.15\proco_11.15.vdproj", "{905FFB64-66B5-4627-963A-068425EDA346}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +17,8 @@ Global
 		{6437D3DF-49B5-4CD9-BE92-384B45A593F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6437D3DF-49B5-4CD9-BE92-384B45A593F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6437D3DF-49B5-4CD9-BE92-384B45A593F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A4D3935-2D67-43AC-B4BB-F80EDE3581AA}.Debug|Any CPU.ActiveCfg = Debug
-		{3A4D3935-2D67-43AC-B4BB-F80EDE3581AA}.Release|Any CPU.ActiveCfg = Release
+		{905FFB64-66B5-4627-963A-068425EDA346}.Debug|Any CPU.ActiveCfg = Debug
+		{905FFB64-66B5-4627-963A-068425EDA346}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
